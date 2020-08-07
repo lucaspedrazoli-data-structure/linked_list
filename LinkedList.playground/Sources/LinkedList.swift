@@ -53,6 +53,17 @@ public struct LinkedList<Value> {
 
     }
 
+    @discardableResult
+    public mutating func pop() -> Value? {
+        defer {
+            head = head?.next
+            if isEmpty {
+                tail = nil
+            }
+        }
+        return head?.value
+    }
+
 }
 
 extension LinkedList: CustomStringConvertible {

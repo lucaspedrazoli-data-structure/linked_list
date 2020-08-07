@@ -42,3 +42,14 @@ example(of: "inserting at a particular index") {
     }
     print("After inserting: \(list)")
 }
+
+example(of: "pop") {
+    var list = LinkedList<Int>()
+    list.push(3)
+    list.push(2)
+    list.push(1)
+    print("Before popping list: \(list)")
+    let poppedValue = list.pop()
+    print("after popping list: \(list)")
+    print("Popped value:  " + String(describing: poppedValue))
+}
