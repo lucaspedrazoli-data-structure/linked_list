@@ -77,3 +77,17 @@ example(of: "removing node after a particular node") {
     print("After removing a particular index \(index): \(list)")
     print("Removed value: " + String(describing: removedValue))
 }
+
+example(of: "using collection") {
+    var list = LinkedList<Int>()
+    for i in 0...9 {
+        list.append(i)
+    }
+    print("list: \(list)")
+    print("first element: \(list[list.startIndex])")
+    print("array containing first 3 elements: \(Array(list.prefix(3)))")
+    print("array containing last 3 elements: \(Array(list.suffix(3)))")
+
+    let sum = list.reduce(0, +)
+    print("Sum of all value: \(sum)")
+}
