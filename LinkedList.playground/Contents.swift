@@ -121,5 +121,5 @@ example(of: "linked list cow") {
 
     print("list 1 uniquely referenced: \(isKnownUniquelyReferenced(&list1.head))")
     let list3 = list1
-    print(print("list 1 uniquely referenced: \(isKnownUniquelyReferenced(&list1.head))"))
+    print("list 1 uniquely referenced: \(isKnownUniquelyReferenced(&list1.head))")
 }

@@ -4,7 +4,10 @@ public struct LinkedList<Value> {
     public var head: Node<Value>?
     public var tail: Node<Value>?
 
+    public init() { }
+
     private mutating func copyNodes() {
+        guard !isKnownUniquelyReferenced(&head) else { return }
         guard var oldNode = head else { return }
         head = Node(value: oldNode.value)
         var newNode = head
@@ -17,10 +20,6 @@ public struct LinkedList<Value> {
         }
 
         tail = newNode
-    }
-
-    public init() {
-
     }
 
     public var isEmpty: Bool {
