@@ -122,4 +122,10 @@ example(of: "linked list cow") {
     print("list 1 uniquely referenced: \(isKnownUniquelyReferenced(&list1.head))")
     let list3 = list1
     print("list 1 uniquely referenced: \(isKnownUniquelyReferenced(&list1.head))")
+
+    print("Removing middle node on list 2")
+    if let node = list2.node(at: 0) {
+        list2.remove(after: node)
+    }
+    print(list2)
 }
