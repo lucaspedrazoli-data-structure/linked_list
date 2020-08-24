@@ -121,6 +121,7 @@ example(of: "linked list cow") {
 
     print("list 1 uniquely referenced: \(isKnownUniquelyReferenced(&list1.head))")
     let list3 = list1
+    print("list 3: \(list3)")
     print("list 1 uniquely referenced: \(isKnownUniquelyReferenced(&list1.head))")
 
     print("Removing middle node on list 2")
@@ -128,4 +129,32 @@ example(of: "linked list cow") {
         list2.remove(after: node)
     }
     print(list2)
+}
+
+example(of: "Print reverse nodes") {
+    var list = LinkedList<Int>()
+    for number in 0...3 { list.append(number) }
+    var reversedList = LinkedList<Int>()
+    list.forEach { node in
+        reversedList.push(node)
+    }
+    print("list: \(list)")
+    print("reversed list: \(reversedList)")
+}
+
+example(of: "Find middle node") {
+    func middleNode(of list: LinkedList<Int>) {
+        let middleIndex = list.count / 2
+        let middleNode = list.node(at: middleIndex)
+        print("list: \(list)")
+        print("middle node: \(String(describing: middleNode!.value))")
+    }
+
+    var evenList = LinkedList<Int>()
+    for number in 1...4 { evenList.append(number) }
+    middleNode(of: evenList)
+
+    var oddList = LinkedList<Int>()
+    for number in 1...3 { oddList.append(number) }
+    middleNode(of: oddList)
 }
