@@ -131,7 +131,39 @@ example(of: "linked list cow") {
     print(list2)
 }
 
-example(of: "Print reverse nodes") {
+example(of: "Print in reverse") {
+    var list = LinkedList<Int>()
+    for number in 0...3 { list.append(number) }
+
+    func printInReverse<T>(_ node: Node<T>?) {
+        guard let node = node else { return }
+        printInReverse(node.next)
+        print(node.value)
+    }
+    print("list: \(list)")
+    printInReverse(list.head)
+}
+
+example(of: "Find middle node -> Runners Technique ") {
+    var list = LinkedList<Int>()
+    for number in 1...7 { list.append(number) }
+    print("list: \(list)")
+
+    var slow = list.head
+    var fast = list.head
+    while let nextFast = fast?.next {
+        fast = nextFast.next
+        print("fast: \(fast!.value)")
+        slow = slow?.next
+        print("slow: \(slow!.value)")
+    }
+
+    if let middleNode = slow {
+        print("middle node: \(middleNode.value)")
+    }
+}
+
+example(of: "Reverse a linked list") {
     var list = LinkedList<Int>()
     for number in 0...3 { list.append(number) }
     var reversedList = LinkedList<Int>()
@@ -140,21 +172,4 @@ example(of: "Print reverse nodes") {
     }
     print("list: \(list)")
     print("reversed list: \(reversedList)")
-}
-
-example(of: "Find middle node") {
-    func middleNode(of list: LinkedList<Int>) {
-        let middleIndex = list.count / 2
-        let middleNode = list.node(at: middleIndex)
-        print("list: \(list)")
-        print("middle node: \(String(describing: middleNode!.value))")
-    }
-
-    var evenList = LinkedList<Int>()
-    for number in 1...4 { evenList.append(number) }
-    middleNode(of: evenList)
-
-    var oddList = LinkedList<Int>()
-    for number in 1...3 { oddList.append(number) }
-    middleNode(of: oddList)
 }
