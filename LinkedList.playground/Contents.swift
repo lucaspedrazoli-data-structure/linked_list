@@ -177,28 +177,27 @@ example(of: "Reverse a linked list simple way") {
 
 example(of: "Reverse a linked list performance way") {
     //instead of store a temporary list in memory
-    //first we set the head into tail
     //we will work with only 3 linked values
     //and replace the linked value(memory pointer) from these 3 objects
     var list = LinkedList<Int>()
     for number in 0...5 { list.append(number) }
     print("list: \(list)")
-    list.tail = list.head
     var prev = list.head //value 1
     var current = list.head?.next // value 2
     prev?.next = nil
     while current != nil {
-        print("--- iteration init ---")
-        print("value 1: \(String(describing: prev?.value))")
-        print("value 2: \(String(describing: current?.value))")
-        print("-------------------------------")
         let next = current?.next //value 3
         current?.next = prev //replace the linked value from var 2
+        print("--- iteration init ---")
+        print("prev value: \(String(describing: prev?.value))")
+        print("current value: \(String(describing: current?.value))")
+        print("-------------------------------")
         prev = current // replace the value from var 1
         current = next //replace the value from var 2
         print("--- iteration end ---")
-        print("value 1: \(String(describing: prev?.value))")
-        print("value 2: \(String(describing: current?.value))")
+        print("prev value: \(String(describing: prev?.value))")
+        print("current value: \(String(describing: current?.value))")
+        print("list transformation: \(prev!)")
         print("-------------------------------")
     }
     list.head = prev
