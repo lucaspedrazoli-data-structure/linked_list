@@ -272,7 +272,7 @@ example(of: "Remove all ocurrences") {
 }
 
 example(of: "Remove all ocurrences performatic way") {
-    let array = [1, 3, 3, 3, 4, 3]
+    let array = [3, 3, 1, 3, 3, 3, 4, 3, 3, 3, 5, 3]
     var list = LinkedList<Int>()
     array.forEach { list.append($0) }
     print("original list: \(list)")
@@ -285,15 +285,15 @@ example(of: "Remove all ocurrences performatic way") {
 
     var prev = list.head
     var current = list.head?.next
-    while let currentNode = current {
-        guard currentNode.value != valueToRemove else {
-            prev?.next = currentNode.next
-            current = prev?.next
-            continue
+    while current != nil {
+        if current!.value == valueToRemove {
+            prev?.next = current?.next
+            current = current?.next
+        } else {
+            prev = current
+            current = current?.next
         }
-        prev = current
-        current = current?.next
     }
-    list.tail = prev
+
     print("updated list: \(list)")
 }
