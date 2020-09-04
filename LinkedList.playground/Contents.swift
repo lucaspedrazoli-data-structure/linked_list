@@ -204,7 +204,7 @@ example(of: "Reverse a linked list performance way") {
     print("reversed: \(list)")
 }
 
-example(of: "Merge lists") {
+example(of: "Merge and sort lists") {
     let array1 = [1, 4, 10, 11]
     let array2 = [1, 2, 3, 6]
     var leftList = LinkedList<Int>()
@@ -232,38 +232,22 @@ example(of: "Merge lists") {
     }
 
     while let leftNode = currentLeft, let rightNode = currentRight {
-        print("begin NEWHEAD \(newHead)")
-        print("tail BEGIN iterate: \(tail)")
-        print("----------------------")
         if leftNode.value < rightNode.value {
             tail?.next = leftNode
             currentLeft = leftNode.next
-            print("set tail ITERATE left: \(tail)")
-            print("----------------------")
         } else {
             tail?.next = rightNode
             currentRight = rightNode.next
-            print("set tail ITERATE RIGHT: \(tail)")
-            print("----------------------")
         }
         tail = tail?.next
-        print("set tail OVERRIDE: \(tail)")
-        print("----------------------")
+    }
 
-        if let leftNodes = currentLeft {
-            tail?.next = leftNodes
-            print("set tail LEFTNODES: \(tail)")
-            print("----------------------")
-        }
+    if let leftNodes = currentLeft {
+        tail?.next = leftNodes
+    }
 
-        if let rightNodes = currentRight {
-            tail?.next = rightNodes
-            print("set tail RIGHTNODES: \(tail)")
-            print("----------------------")
-        }
-
-        print("current left: \(currentLeft)")
-        print("current right: \(currentRight)")
+    if let rightNodes = currentRight {
+        tail?.next = rightNodes
     }
 
     var mergedList = LinkedList<Int>()
@@ -274,5 +258,5 @@ example(of: "Merge lists") {
         }
         return tail
     }()
-    print(mergedList)
+    print("merged list: \(mergedList)")
 }
