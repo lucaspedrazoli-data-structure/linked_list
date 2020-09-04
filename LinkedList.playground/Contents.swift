@@ -204,8 +204,8 @@ example(of: "Reverse a linked list performance way") {
     print("reversed: \(list)")
 }
 
-example(of: "Merge and sort lists") {
-    let array1 = [1, 4, 10, 11]
+example(of: "Merge sorted lists") {
+    let array1 = [1, 4, 10, 11, 12]
     let array2 = [1, 2, 3, 6]
     var leftList = LinkedList<Int>()
     var rightList = LinkedList<Int>()
@@ -215,48 +215,37 @@ example(of: "Merge and sort lists") {
     print("list LEFT: \(leftList)")
     print("list RIGHT: \(rightList)")
 
-    var newHead: Node<Int>?
-    var tail: Node<Int>?
+    var newList = LinkedList<Int>()
     var currentLeft = leftList.head
     var currentRight = rightList.head
 
-    if let leftNode = currentLeft, let rightNode = currentRight {
-        if leftNode.value < rightNode.value {
-            newHead = leftNode
-            currentLeft = leftNode.next
-        } else {
-            newHead = rightNode
-            currentRight = rightNode.next
-        }
-        tail = newHead
-    }
-
     while let leftNode = currentLeft, let rightNode = currentRight {
         if leftNode.value < rightNode.value {
-            tail?.next = leftNode
+            newList.append(leftNode.value)
             currentLeft = leftNode.next
         } else {
-            tail?.next = rightNode
+            newList.append(rightNode.value)
             currentRight = rightNode.next
         }
-        tail = tail?.next
     }
 
-    if let leftNodes = currentLeft {
-        tail?.next = leftNodes
-    }
-
-    if let rightNodes = currentRight {
-        tail?.next = rightNodes
-    }
-
-    var mergedList = LinkedList<Int>()
-    mergedList.head = newHead
-    mergedList.tail = {
+    if let leftNode = currentLeft {
+        newList.append(leftNode.value)
+        var tail: Node<Int>? = leftNode
         while let next = tail?.next {
-            tail = next
+            newList.append(next.value)
+            tail = tail?.next
         }
-        return tail
-    }()
-    print("merged list: \(mergedList)")
+    }
+
+    if let rightNode = currentRight {
+        newList.append(rightNode.value)
+        var tail: Node<Int>? = rightNode
+        while let next = tail?.next {
+            newList.append(next.value)
+            tail = tail?.next
+        }
+    }
+
+    print("merged list: \(newList)")
 }
