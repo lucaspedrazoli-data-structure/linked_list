@@ -203,3 +203,76 @@ example(of: "Reverse a linked list performance way") {
     list.head = prev
     print("reversed: \(list)")
 }
+
+example(of: "Merge lists") {
+    let array1 = [1, 4, 10, 11]
+    let array2 = [1, 2, 3, 6]
+    var leftList = LinkedList<Int>()
+    var rightList = LinkedList<Int>()
+    array1.forEach { leftList.append($0) }
+    array2.forEach { rightList.append($0) }
+
+    print("list LEFT: \(leftList)")
+    print("list RIGHT: \(rightList)")
+
+    var newHead: Node<Int>?
+    var tail: Node<Int>?
+    var currentLeft = leftList.head
+    var currentRight = rightList.head
+
+    if let leftNode = currentLeft, let rightNode = currentRight {
+        if leftNode.value < rightNode.value {
+            newHead = leftNode
+            currentLeft = leftNode.next
+        } else {
+            newHead = rightNode
+            currentRight = rightNode.next
+        }
+        tail = newHead
+    }
+
+    while let leftNode = currentLeft, let rightNode = currentRight {
+        print("begin NEWHEAD \(newHead)")
+        print("tail BEGIN iterate: \(tail)")
+        print("----------------------")
+        if leftNode.value < rightNode.value {
+            tail?.next = leftNode
+            currentLeft = leftNode.next
+            print("set tail ITERATE left: \(tail)")
+            print("----------------------")
+        } else {
+            tail?.next = rightNode
+            currentRight = rightNode.next
+            print("set tail ITERATE RIGHT: \(tail)")
+            print("----------------------")
+        }
+        tail = tail?.next
+        print("set tail OVERRIDE: \(tail)")
+        print("----------------------")
+
+        if let leftNodes = currentLeft {
+            tail?.next = leftNodes
+            print("set tail LEFTNODES: \(tail)")
+            print("----------------------")
+        }
+
+        if let rightNodes = currentRight {
+            tail?.next = rightNodes
+            print("set tail RIGHTNODES: \(tail)")
+            print("----------------------")
+        }
+
+        print("current left: \(currentLeft)")
+        print("current right: \(currentRight)")
+    }
+
+    var mergedList = LinkedList<Int>()
+    mergedList.head = newHead
+    mergedList.tail = {
+        while let next = tail?.next {
+            tail = next
+        }
+        return tail
+    }()
+    print(mergedList)
+}
