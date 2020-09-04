@@ -249,3 +249,51 @@ example(of: "Merge sorted lists") {
 
     print("merged list: \(newList)")
 }
+
+example(of: "Remove all ocurrences") {
+    let array = [1, 3, 3, 3, 4, 3]
+    var list = LinkedList<Int>()
+    array.forEach { list.append($0) }
+    print("original list: \(list)")
+    var newList = LinkedList<Int>()
+    var node = list.head
+
+    if let head = list.head, head.value != 3 {
+        newList.append(head.value)
+    }
+
+    while let next = node?.next {
+        if next.value != 3 {
+            newList.append(next.value)
+        }
+        node = node?.next
+    }
+    print("newlist: \(newList)")
+}
+
+example(of: "Remove all ocurrences performatic way") {
+    let array = [1, 3, 3, 3, 4, 3]
+    var list = LinkedList<Int>()
+    array.forEach { list.append($0) }
+    print("original list: \(list)")
+
+    let valueToRemove = 3
+
+    while let head = list.head, head.value == valueToRemove {
+        list.head = head.next
+    }
+
+    var prev = list.head
+    var current = list.head?.next
+    while let currentNode = current {
+        guard currentNode.value != valueToRemove else {
+            prev?.next = currentNode.next
+            current = prev?.next
+            continue
+        }
+        prev = current
+        current = current?.next
+    }
+    list.tail = prev
+    print("updated list: \(list)")
+}
