@@ -9,6 +9,7 @@ A linked list is a chain of nodes. Nodes have two responsibilities:
 public class Node<Value> {
   public var value: Value
   public var next: Node?
+  
   public init(value: Value, next: Node? = nil) {
     self.value = value
     self.next = next
@@ -21,8 +22,7 @@ public struct LinkedList<Value> {
   public var head: Node<Value>?
   public var tail: Node<Value>?
   public init() {}
-  public var isEmpty: Bool {
-head == nil }
+  public var isEmpty: Bool { head == nil }
 }
 ```
 
